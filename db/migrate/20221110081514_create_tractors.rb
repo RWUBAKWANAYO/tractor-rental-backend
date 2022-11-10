@@ -6,7 +6,7 @@ class CreateTractors < ActiveRecord::Migration[7.0]
       t.string :description
       t.integer :price
       t.integer :completion
-      t.integer :demand
+      t.integer :demand, :default => 0
 
       t.timestamps
     end
