@@ -1,0 +1,2 @@
+class Tractor < ApplicationRecord
+end
