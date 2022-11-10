@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_081607) do
 
   create_table "tractors", force: :cascade do |t|
     t.string "photo"
-    t.string "title"
+    t.string "name"
     t.string "description"
     t.integer "price"
     t.integer "completion"

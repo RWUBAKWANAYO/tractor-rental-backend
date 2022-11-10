@@ -2,7 +2,7 @@ class CreateTractors < ActiveRecord::Migration[7.0]
   def change
     create_table :tractors do |t|
       t.string :photo
-      t.string :title
+      t.string :name
       t.string :description
       t.integer :price
       t.integer :completion
