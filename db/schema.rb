@@ -16,11 +16,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_081607) do
 
   create_table "rents", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "tractors_id", null: false
+    t.bigint "tractor_id", null: false
     t.integer "total_costs"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tractors_id"], name: "index_rents_on_tractors_id"
+    t.index ["tractor_id"], name: "index_rents_on_tractor_id"
     t.index ["user_id"], name: "index_rents_on_user_id"
   end
 
@@ -52,6 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_081607) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "rents", "tractors", column: "tractors_id"
+  add_foreign_key "rents", "tractors"
   add_foreign_key "rents", "users"
 end

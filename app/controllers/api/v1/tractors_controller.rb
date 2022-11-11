@@ -1,51 +1,64 @@
-class TractorsController < ApplicationController
+class Api::V1::TractorsController < ApplicationController
   before_action :set_tractor, only: %i[ show update destroy ]
 
-  # GET /tractors
   def index
     @tractors = Tractor.all
 
-    render json: @tractors
+    if @tractors
+      render json: { message: 'Tractors fetched successfully', data: @tractors }, status: :ok
+    else
+      render json: { message: 'fail to get tractors', errors: @tractors.errors.full_messages },
+             status: :unprocessable_entity
+    end
   end
 
-  # GET /tractors/1
   def show
-    render json: @tractor
+    if @tractor
+      render json: { message: 'Tractor fetched successfully', data: @tractor }, status: :ok
+    else
+      render json: { message: 'Fail to get tractor', errors: @tractor.errors.full_messages },
+             status: :unprocessable_entity
+    end
   end
 
-  # POST /tractors
   def create
     @tractor = Tractor.new(tractor_params)
 
     if @tractor.save
-      render json: @tractor, status: :created, location: @tractor
+      render json: { message: 'Tractor created successfully', data: @tractor }, status: :created
     else
-      render json: @tractor.errors, status: :unprocessable_entity
+      render json: { message: 'Fail to create tractor', errors: @tractor.errors.full_messages },
+             status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /tractors/1
   def update
     if @tractor.update(tractor_params)
-      render json: @tractor
+      render json: { message: 'Tractor updated successfully', data: @tractor }, status: :ok
     else
-      render json: @tractor.errors, status: :unprocessable_entity
+      render json: { message: 'Fail to update tractor', errors: @tractor.errors.full_messages },
+      status: :unprocessable_entity
     end
   end
 
-  # DELETE /tractors/1
   def destroy
-    @tractor.destroy
+    if @tractor.destroy
+      render json: { message: 'Tractor deleted successfully' }, status: :ok
+    else
+      render json: { message: 'Fail to delete Tractor', errors: @tractor.errors.full_messages },
+             status: :unprocessable_entity
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_tractor
       @tractor = Tractor.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {error: e.message }, status: :not_found
     end
 
-    # Only allow a list of trusted parameters through.
     def tractor_params
-      params.require(:tractor).permit(:photo, :title, :description, :price, :completion, :demand)
+      params.require(:tractor).permit(:photo, :name, :description, :price, :completion)
     end
 end
