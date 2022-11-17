@@ -13,6 +13,9 @@ Rails.application.routes.draw do
       resources :users, only: [:update]
       resources :rents
       resources :tractors
+      get '/tractors_by_popular', to: 'tractors#tractors_by_popular'
+      get '/tractors_by_price', to: 'tractors#tractors_by_price'
+
    end
   end
 end

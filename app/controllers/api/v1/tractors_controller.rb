@@ -1,9 +1,28 @@
 class Api::V1::TractorsController < ApplicationController
   before_action :set_tractor, only: %i[ show update destroy ]
+  before_action :set_tractors, only: %i[ index]
 
   def index
-    @tractors = Tractor.all
+    if @tractors
+      render json: { message: 'Tractors fetched successfully', data: @tractors }, status: :ok
+    else
+      render json: { message: 'fail to get tractors', errors: @tractors.errors.full_messages },
+             status: :unprocessable_entity
+    end
+  end
 
+  def tractors_by_popular
+    @tractors = Tractor.order('demand DESC')
+    if @tractors
+      render json: { message: 'Tractors fetched successfully', data: @tractors }, status: :ok
+    else
+      render json: { message: 'fail to get tractors', errors: @tractors.errors.full_messages },
+             status: :unprocessable_entity
+    end
+  end
+
+  def tractors_by_price
+    @tractors = Tractor.where(:price=> (params[:from])..(params[:to]))
     if @tractors
       render json: { message: 'Tractors fetched successfully', data: @tractors }, status: :ok
     else
@@ -58,6 +77,15 @@ class Api::V1::TractorsController < ApplicationController
       render json: {error: e.message }, status: :not_found
     end
 
+    def set_tractors
+      @tractors = Tractor.all
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {error: e.message }, status: :not_found
+    end
+
+    # def sort_by_popular(tractors)
+    #   tractors.order('max(meetings.meeting_time) DESC')
+    # end
     def tractor_params
       params.require(:tractor).permit(:photo, :name, :description, :price, :completion)
     end
