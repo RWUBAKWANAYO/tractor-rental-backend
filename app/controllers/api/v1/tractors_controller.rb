@@ -41,8 +41,9 @@ class Api::V1::TractorsController < ApplicationController
   end
 
   def create
+    
     @tractor = Tractor.new(tractor_params)
-
+    @tractor.user_id = get_user_from_token.id
     if @tractor.save
       render json: { message: 'Tractor created successfully', data: @tractor }, status: :created
     else
@@ -83,10 +84,8 @@ class Api::V1::TractorsController < ApplicationController
       render json: {error: e.message }, status: :not_found
     end
 
-    # def sort_by_popular(tractors)
-    #   tractors.order('max(meetings.meeting_time) DESC')
-    # end
     def tractor_params
-      params.require(:tractor).permit(:photo, :name, :description, :price, :completion)
+      params.require(:tractor).permit(:photo, :name, :description,
+       :price,:new_farm_price, :completion, :user_id)
     end
 end
