@@ -1,4 +1,5 @@
 class Api::V1::TractorsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_tractor, only: %i[ show update destroy ]
   before_action :set_tractors, only: %i[ index]
 
@@ -43,7 +44,6 @@ class Api::V1::TractorsController < ApplicationController
   def create
     
     @tractor = Tractor.new(tractor_params)
-    @tractor.user_id = get_user_from_token.id
     if @tractor.save
       render json: { message: 'Tractor created successfully', data: @tractor }, status: :created
     else
@@ -86,6 +86,6 @@ class Api::V1::TractorsController < ApplicationController
 
     def tractor_params
       params.require(:tractor).permit(:photo, :name, :description,
-       :price,:new_farm_price, :completion, :user_id)
+       :price,:new_farm_price, :completion)
     end
 end

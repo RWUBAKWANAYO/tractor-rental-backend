@@ -26,7 +26,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_081607) do
   end
 
   create_table "tractors", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "photo"
     t.string "name"
     t.string "description"
@@ -36,7 +35,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_081607) do
     t.integer "demand", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_tractors_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,5 +56,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_081607) do
 
   add_foreign_key "rents", "tractors"
   add_foreign_key "rents", "users"
-  add_foreign_key "tractors", "users"
 end
