@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: tractor_rental_backend_production
-  username: tractor_rental_backend
-  password: <%= ENV["TRACTOR_RENTAL_BACKEND_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
+  database: <%= ENV["PGDATABASE"] %>
+  username: <%= ENV["PGUSER"] %>
+  password: <%= ENV["PGPASSWORD"] %>
