@@ -86,6 +86,6 @@ class Api::V1::TractorsController < ApplicationController
 
     def tractor_params
       params.require(:tractor).permit(:photo, :name, :description,
-       :price,:new_farm_price, :completion)
+      :demand, :price,:new_farm_price, :completion)
     end
 end
