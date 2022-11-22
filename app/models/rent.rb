@@ -2,6 +2,7 @@ class Rent < ApplicationRecord
   belongs_to :user
   belongs_to :tractor
 
+  validates :rent_date,:new_farm,:farm_size, presence: true,
   validates :total_costs, presence: true, numericality: { greater_than: 0 }
 
   after_save :update_demand

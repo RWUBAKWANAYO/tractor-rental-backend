@@ -88,6 +88,6 @@ class Api::V1::RentsController < ApplicationController
     end
     # Only allow a list of trusted parameters through.
     def rent_params
-      params.require(:rent).permit(:total_costs, :tractor_id, :rent_date)
+      params.require(:rent).permit(:total_costs, :tractor_id, :rent_date, :farm_size, :new_farm)
     end
 end

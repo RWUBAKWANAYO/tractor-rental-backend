@@ -13,12 +13,13 @@
 ActiveRecord::Schema[7.0].define(version: 2022_11_10_081607) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "timescaledb"
 
   create_table "rents", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "tractor_id", null: false
     t.integer "total_costs"
+    t.boolean "new_farm"
+    t.string "farm_size"
     t.date "rent_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
