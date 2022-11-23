@@ -13,6 +13,6 @@ before_action :authenticate_user!
   end
 
   def user_params
-    params.require(:user).permit(:photo)
+    params.require(:user).permit(:photo, :name)
   end
 end

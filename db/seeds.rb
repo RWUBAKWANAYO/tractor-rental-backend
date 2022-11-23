@@ -6,7 +6,16 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-# Seed tractors start....
+puts "Seed admin start...."
+User.create(
+name:"Admin",
+role:852863,
+email:"admin@gmail.com",
+password:"admin@gmail.com")
+
+puts "Seed admin end...."
+
+puts "Seed tractors start...."
 Tractor.create([
 {
   name: 'Mahindra.',
@@ -100,4 +109,5 @@ Tractor.create([
     'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the',
 }
 ])
-# Seed tractors End....
+
+puts "Seed tractors End...."
