@@ -68,7 +68,7 @@ class Api::V1::RentsController < ApplicationController
   private
 
     def set_rents
-      @rents = Rent.includes(:tractor).where(user_id: get_user_from_token.id)
+      @rents = Rent.includes(:tractor).where(user_id: get_user_from_token.id).order('created_at DESC')
     rescue ActiveRecord::RecordNotFound => e
       render json: {error: e.message }, status: :not_found
     end
