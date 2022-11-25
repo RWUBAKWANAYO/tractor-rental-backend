@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
   before_action :authenticate_user!
 
   def update
-    current_user = get_user_from_token
+    current_user = user_from_token
     if current_user.update(user_params)
       render json: { message: 'user photo updated successfully', user: current_user },
              except: [:jti], status: :ok
