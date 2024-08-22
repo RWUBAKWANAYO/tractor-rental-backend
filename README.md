@@ -1,8 +1,8 @@
-# TractorRental
+# Tractor
 
 >This is an online application that makes it easy for farmers to rent tractors, with accurate information about cost and time estimates to get work done quickly and efficiently..
 
-![tractorrent1](https://user-images.githubusercontent.com/68381641/212620589-7c2822ac-9882-4344-ba46-231f11852493.png)
+![tractor](https://user-images.githubusercontent.com/68381641/212620589-7c2822ac-9882-4344-ba46-231f11852493.png)
 
 
 ## Live Demo
